@@ -1,6 +1,7 @@
 "use client";
 
 import { updateEntry } from "@/utils/api";
+import { invertHexColor } from "@/utils/common";
 import { useState } from "react";
 import { useAutosave } from "react-autosave";
 
@@ -10,13 +11,14 @@ const Editor = ({ entry }) => {
 
   const [analysis, setAnalysis] = useState(entry.analysis);
 
-  const { mood, summary, subject, color, negative } = analysis;
+  const { mood, subject, color, negative } = analysis;
   const analysisData = [
-    { name: "Summary", value: summary },
+    { name: "Summary", value: analysis?.summary || "Write about your day!" },
     { name: "Subject", value: subject },
     { name: "Mood", value: mood },
     { name: "Negative", value: negative ? "True" : "False" },
   ];
+  const fontInvertedColor = invertHexColor(color, true);
 
   useAutosave({
     data: entryContent,
@@ -31,27 +33,32 @@ const Editor = ({ entry }) => {
 
   return (
     <div className="w-full h-full grid grid-cols-3 gap-0">
-      <div className="col-span-2">
+      <div className="col-span-2 bg-white">
         {isLoading && <div>...Saving in progress</div>}
         <textarea
-          className="w-full h-full p-8 text-xl outline-none"
+          className="w-full h-full p-8 text-xl outline-non"
           value={entryContent}
           onChange={(text) => setEntryContent(text.target.value)}
         />
       </div>
 
-      <div className="border-l border-black/10 col-span-1">
+      <div className="col-span-1 bg-highlight">
         <div className="px-6 py-10" style={{ backgroundColor: color }}>
-          <h2 className="text-2xl">Analysis</h2>
+          <h2
+            className="text-2xl font-bold"
+            style={{ color: fontInvertedColor }}
+          >
+            Analysis
+          </h2>
         </div>
         <div>
           <ul>
             {analysisData.map((item) => (
               <li
                 key={item.name}
-                className="px-2 py-4 flex items-center justify-between border-y border-black/10"
+                className="px-4 py-4 flex items-center justify-between border-y border-white "
               >
-                <span className="text-lg font-semibold">{item.name}</span>
+                <span className="text-lg font-semibold mr-2">{item.name}</span>
                 <span>{item.value}</span>
               </li>
             ))}

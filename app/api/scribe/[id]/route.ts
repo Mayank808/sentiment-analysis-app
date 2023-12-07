@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export const PATCH = async (request, { params }) => {
   const { content } = await request.json();
   const user = await getUserByClerkId();
-  
+
   const updateEntry = await prisma.scribeEntry.update({
     where: {
       userId_id: {
@@ -26,6 +26,7 @@ export const PATCH = async (request, { params }) => {
       entryId: updateEntry.id,
     },
     create: {
+      userId: user.id,
       entryId: updateEntry.id,
       ...analysis,
     },

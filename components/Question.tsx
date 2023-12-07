@@ -26,23 +26,22 @@ const Question = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          disabled={loading}
           onChange={onChange}
           type="text"
           value={question}
           placeholder="Ask a question?"
-          className="border border-black/20 px-2 py-2 text-lg rounded-lg"
+          className="border border-white px-4 py-2 text-lg rounded-lg"
         />
 
         <button
-          disabled={loading}
           type="submit"
-          className="bg-blue-400 px-4 py-2 rounded-lg text-lg"
+          className=" bg-highlight_white mx-5 px-8 py-2 rounded-lg text-lg text-background font-bold"
         >
           Ask
         </button>
       </form>
-      {loading && (<div>...loading</div>)}
+      {loading && <div className="text-white">...loading</div>}
+      {answer && <div className="text-white px-2 py-2">{answer}</div>}
     </div>
   );
 };

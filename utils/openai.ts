@@ -21,6 +21,11 @@ const parser = StructuredOutputParser.fromZodSchema(
     subject: z
       .string()
       .describe("quickly describe the subject of the journal entry."),
+    sentimentScore: z
+      .number()
+      .describe(
+        "conduct sentiment analysis of the journal entry and rate it on a scale from 0 to 100, where 0 is extremely negative, 50 is neutral, and 100 is extremely positive."
+      ),
     negative: z
       .boolean()
       .describe(
@@ -29,7 +34,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     color: z
       .string()
       .describe(
-        "a hexidecimal color code that repersents the mood of the journal entry. Example #03ff07 for the color green repersenting happiness. Try to use vibrant colors."
+        "a hexidecimal color code that repersents the mood of the journal entry. Example #03ff07 for the color green can repersent happiness. Use vibrant colors."
       ),
   })
 );
@@ -85,7 +90,10 @@ export const questionAnswer = async (question, entries) => {
 
   const answer = await chain.call({
     input_documents: relavantDocs,
-    question,
+    question:
+      "Question: " +
+      question +
+      ". Give a single response to the question based on all the provided journal entries.",
   });
 
   return answer.output_text;

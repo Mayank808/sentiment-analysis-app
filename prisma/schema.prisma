@@ -20,6 +20,7 @@ model User {
   email   String @unique
 
   entries ScribeEntry[]
+  analyses Analysis[]
 }
 
 model ScribeEntry {
@@ -45,11 +46,16 @@ model Analysis {
   entryId String
   entry   ScribeEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
 
-  mood     String
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  sentimentScore Float @default(50)
+  mood     String @default("Neutral")
   summary  String  @db.Text
-  color    String
-  negative Boolean
-  subject String
+  color    String @default("#CF3476")
+  subject String @default("Write about your day!")
+  negative Boolean @default(false)
 
   @@unique([entryId])
+  @@index([userId])
 }

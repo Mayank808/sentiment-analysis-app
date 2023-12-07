@@ -1,7 +1,11 @@
 import { SignUp } from "@clerk/nextjs";
 
 const SignUpPage = () => {
-  return <SignUp redirectUrl="/new-user" afterSignUpUrl="/new-user" />;
+  return (
+    <div className="flex h-full justify-center items-center">
+      <SignUp redirectUrl="/new-user" afterSignUpUrl="/new-user" />
+    </div>
+  );
 };
 
 export default SignUpPage;

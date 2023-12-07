@@ -15,6 +15,9 @@ const getUserEntries = async () => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      analysis: true,
+    },
   });
 
   return entries;
@@ -23,9 +26,9 @@ const getUserEntries = async () => {
 const ScribePage = async () => {
   const entries = await getUserEntries();
   return (
-    <div className="px-6 py-8 bg-slate-100 h-full">
-      <h2 className="text-4xl mb-8">My Journals</h2>
-      <div className="my-8">
+    <div className="px-6 py-8 h-full">
+      <h2 className="text-4xl font-extrabold text-white mb-4">My Journals</h2>
+      <div className="my-4">
         <Question />
       </div>
       <div className="grid grid-cols-3 gap-4">
