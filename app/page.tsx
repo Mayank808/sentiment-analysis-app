@@ -13,6 +13,7 @@ export default async function Home() {
         <h1 className="text-6xl">ScribeMe</h1>
         <div className="pt-3 text-2xl text-white/60">
           <TypeWriterEffect
+            data-testid="typewriter"
             strings={[
               "Journel and reflect on yourself over time.",
               "Express Yourself Authentically",
@@ -22,7 +23,7 @@ export default async function Home() {
           />
         </div>
         <div className="my-4">
-          <Link href={href}>
+          <Link href={href} data-testid="routing">
             <button className="bg-blue px-4 py-2 rounded-lg text-xl">
               Get started
             </button>
