@@ -42,7 +42,7 @@ const Editor = ({ entry }) => {
         />
       </div>
 
-      <div className="col-span-1 bg-highlight">
+      <div className="col-span-1 bg-white">
         <div className="px-6 py-10" style={{ backgroundColor: color }}>
           <h2
             className="text-2xl font-bold"
@@ -56,10 +56,10 @@ const Editor = ({ entry }) => {
             {analysisData.map((item) => (
               <li
                 key={item.name}
-                className="px-4 py-4 flex items-center justify-between border-y border-white "
+                className="px-4 py-4 flex items-center justify-between border-y gap-2 border-white "
               >
                 <span className="text-lg font-semibold mr-2">{item.name}</span>
-                <span>{item.value}</span>
+                <span className="text-left w-full">{item.value}</span>
               </li>
             ))}
           </ul>

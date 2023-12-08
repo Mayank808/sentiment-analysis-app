@@ -13,7 +13,7 @@ const parser = StructuredOutputParser.fromZodSchema(
     mood: z
       .string()
       .describe(
-        "infer the mood of the person who wrote the journal entry. Use descriptive words to describe the mood."
+        "infer the mood of the person who wrote the journal entry. Use descriptive words to describe the mood. limit mood to 1-2 words."
       ),
     summary: z
       .string()
